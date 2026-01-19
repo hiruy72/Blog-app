@@ -4,10 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { FieldGroup, Field, FieldLabel, FieldError } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { log } from "node:console";
 import { Controller, useForm } from "react-hook-form";
+import z from "zod";
 
 export default function SignUpPage() {
     const form = useForm({
@@ -19,8 +21,12 @@ export default function SignUpPage() {
         }
     });
 
-    function onSubmit(){
-        console.log("ehhe")
+    function onSubmit(data: z.infer<typeof authSchema>){
+        authClient.signUp.email({
+            name: data.name,
+            email: data.email,
+            password: data.password,
+        })
     }
     return(
         <>
