@@ -7,11 +7,16 @@ import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { error } from "better-auth/api";
+import { useRouter } from "next/navigation";
 import { log } from "node:console";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
 
 export default function SignUpPage() {
+
+    const router = useRouter()
     const form = useForm({
         resolver: zodResolver(authSchema),
         defaultValues: {
@@ -26,6 +31,18 @@ export default function SignUpPage() {
             name: data.name,
             email: data.email,
             password: data.password,
+
+            fetchOptions: {
+                onSuccess: () => {
+                    toast.success("Account Created Successfully")
+                    router.push('/')
+
+                },
+
+                onError: (error) => {
+                    toast.error(error.error.message)
+                }
+            }
         })
     }
     return(
