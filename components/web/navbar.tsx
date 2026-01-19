@@ -28,7 +28,7 @@ export function Navbar() {
              </div>
              <div className="flex items-center gap-2">
                 {isLoading? null : isAuthenticated?(
-                    <Button onClick={()=> authClient.signOut({
+                    <Button onClick={async ()=> await authClient.signOut({
                         fetchOptions: {
 
                             onSuccess: () => {

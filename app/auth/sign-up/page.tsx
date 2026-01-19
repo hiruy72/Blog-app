@@ -8,13 +8,16 @@ import { authClient } from "@/lib/auth-client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { error } from "better-auth/api";
+import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { log } from "node:console";
+import { useTransition } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import z from "zod";
 
 export default function SignUpPage() {
+        const [isPending, startTransition] = useTransition()
 
     const router = useRouter()
     const form = useForm({
@@ -26,8 +29,9 @@ export default function SignUpPage() {
         }
     });
 
-    function onSubmit(data: z.infer<typeof authSchema>){
-        authClient.signUp.email({
+     function onSubmit(data: z.infer<typeof authSchema>){
+        startTransition(async ()=>{
+            await authClient.signUp.email({
             name: data.name,
             email: data.email,
             password: data.password,
@@ -44,6 +48,8 @@ export default function SignUpPage() {
                 }
             }
         })
+        })
+        
     }
     return(
         <>
@@ -96,7 +102,14 @@ export default function SignUpPage() {
                             </Field>
                         )}
                      />
-                     <Button>SignUp</Button>
+                     <Button disabled={isPending}>{isPending ?(
+                        <>
+                         <Loader2 className="size-4 animate-spin"/>
+                         <span>Loadin...</span>
+                        </>
+                     ): (
+                        <span></span>
+                     )}</Button>
                    </FieldGroup>
                    
                 </form>
