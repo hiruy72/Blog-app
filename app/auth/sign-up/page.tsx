@@ -54,9 +54,9 @@ export default function SignUpPage() {
     return(
         <>
          <Card>
-            <CardHeader>
-                <CardTitle>SignUp</CardTitle>
-            <CardDescription>
+            <CardHeader className="pb-6 text-center">
+                <CardTitle className="text-2xl font-extrabold">SignUp</CardTitle>
+            <CardDescription className="font-bold">
                  Create your account here.
             </CardDescription>
             </CardHeader>
@@ -105,10 +105,10 @@ export default function SignUpPage() {
                      <Button disabled={isPending}>{isPending ?(
                         <>
                          <Loader2 className="size-4 animate-spin"/>
-                         <span>Loadin...</span>
+                         <span>Loading...</span>
                         </>
                      ): (
-                        <span></span>
+                        <span className="font-bold">SignUp</span>
                      )}</Button>
                    </FieldGroup>
                    

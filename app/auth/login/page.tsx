@@ -50,9 +50,9 @@ export default function LoginPage() {
 
     return(
         <Card>
-            <CardHeader>
-                <CardTitle className="flex ">Login</CardTitle>
-                <CardDescription> Login to access your data</CardDescription>
+            <CardHeader className="pb-3 text-center">
+                <CardTitle className="text-2xl font-extrabold">Login</CardTitle>
+                <CardDescription className="font-bold"> Login to access your data</CardDescription>
             </CardHeader>
             <CardContent>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
