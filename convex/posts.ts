@@ -4,7 +4,7 @@ import { authComponent } from "./auth";
 
 // Create a new task with the given text
 export const createPost = mutation({
-  args: { title: v.string() , body: v.string(), authorId: v.string() },
+  args: { title: v.string() , body: v.string() },
   handler: async (ctx, args) => {
     const user = await authComponent.safeGetAuthUser(ctx);
 
@@ -14,7 +14,7 @@ export const createPost = mutation({
     const blogArticle = await ctx.db.insert("posts", {
       title: args.title,
       body: args.body,
-      authorId: args.authorId,})
+      authorId: user._id})
 
     return blogArticle;
   },
