@@ -1,5 +1,6 @@
 "use client"
 import { postSchema } from "@/app/schemas/blog";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
@@ -38,7 +39,7 @@ export default function createRoute(){
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
-                        <FieldGroup>
+                        <FieldGroup className="gap-y-4">
                             <Controller
                               name="title"
                               control = {form.control}
@@ -65,6 +66,7 @@ export default function createRoute(){
                                 </Field>
                               )}
                              />
+                             <Button>Create Post</Button>
                         </FieldGroup>
                         
                     </form>
