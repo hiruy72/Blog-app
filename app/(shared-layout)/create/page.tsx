@@ -1,4 +1,5 @@
 "use client"
+
 import { postSchema } from "@/app/schemas/blog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -36,7 +37,8 @@ export default function createRoute(){
         await mutation({
         title: values.title,
         body: values.content
-
+        
+      
        
      })
         toast.success("Blog Article Created Successfully")
@@ -45,7 +47,7 @@ export default function createRoute(){
     
    })
 }
-    return(
+    return (
 
         <div className="py-12">
             <div className="text-center mb-12">
@@ -107,4 +109,4 @@ export default function createRoute(){
 
         </div>
     )
-}
+} 
